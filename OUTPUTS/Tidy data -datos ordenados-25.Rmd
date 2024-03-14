@@ -1,0 +1,80 @@
+---
+title: "Tidy data -datos ordenados-25"
+author: "PRISCILA C. O."
+date: "2024-03-14"
+output: html_document
+---
+Hecho con gusto por Carla Carolina Pérez Hernández (UAEH)
+
+LABORATORIO - Tidy data -datos ordenados- PARTE 1,2 y 3.
+
+Objetivo: Introducción práctica a los datos ordenados (o tidy data) y a las herramientas que provee el paquete tidyr.
+
+En este ejercicio vamos a:
+ 1. Cargar datos (tibbles)
+ 2. Converir nuestros tiblles en dataframes (para su exportación)
+ 3. Exportar dataframes originales
+ 4. Pivotar tabla 4a
+ 5. Exportar resutltado (TABLA PIVOTANTE)
+ 6. Separar y unir tablas
+
+
+Prerrequisitos
+instalar paquete tidyverse
+install.packages("tidyverse")
+instalar paquete de datos
+install.packages("remotes")
+remotes::install_github("cienciadedatos/datos")
+install.packages("datos")
+Cargar paquete tidyverse
+```{r}
+library(tidyverse)
+```
+argar paquete de datos
+```{r}
+library(datos)
+```
+tabla 1 hasta tabla 4b
+ver datos como tibble 
+```{r}
+datos::tabla1
+datos::tabla2
+datos::tabla3
+datos::tabla4a
+datos::tabla4b
+```
+un tibble es similar a un dataframe pero con limitantes
+ver datos como dataframe 
+```{r}
+df1<-data_frame(tabla1)
+df2<-data_frame(tabla2)
+df3<-data_frame(tabla3)
+df4a<-data_frame(tabla4a)
+df4b<-data_frame(tabla4b)
+```
+los datos ordenados tienen 3 caracteristicas esenciales, 1. cada variable debe tener su propia columna, 2. cada observación debe tener su propia fila y cada valor debe tener su propia celda
+exportar los dataframes originales(para gusrdarlos en la computadora)
+```{r}
+write.csv(df1,file="df1.csv")
+write.csv(df2,file="df2.csv")
+write.csv(df3,file="df3.csv")
+write.csv(df4a,file="df4a.csv")
+write.csv(df4b,file="df4b.csv")
+```
+explicación de tibble
+```{r}
+vignette("tibble")
+```
+
+
+
+
+
+# Ordenar datos con la tabla4a (PIVOTAR)
+t4a_PIVOTANTE=tabla4a  %>%
+  pivot_longer(cols=c("1999","2000"),names_to="anio",values_to="casos")
+
+
+
+# Exportar resultado: tabla ordenada
+write.csv(t4a_PIVOTANTE,file="t4a_PIVOTANTE.csv")
